@@ -118,7 +118,7 @@ planning_bm_conf = env_conf(
 )
 
 # env
-env_store = store(group='env')
+env_store = store(group='env_conf')
 env_store(pushing_cs_conf, name='pushing_cs')
 env_store(pushing_cm_conf, name='pushing_cm')
 env_store(pushing_bs_conf, name='pushing_bs')
