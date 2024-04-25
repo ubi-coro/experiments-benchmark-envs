@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools >= 61.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "experiments-benchmark-envs"
+description = "Training and evaluation scripts for Gymnasium-Planar-Robotics benchmark environments"
+readme = "README.md"
+requires-python = ">= 3.10"
+authors = [{ name = "Lara Bergmann", email = "lara.bergmann@uni-bielefeld.de" }]
+keywords = ["Reinforcement Learning Algorithms", "Reinforcement Learning", "Gymnasium", "Gym", "AI", "Machine Learning"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    'Intended Audience :: Science/Research',
+    'Topic :: Scientific/Engineering :: Artificial Intelligence',
+]
+dependencies = [
+    "gymnasium-planar-robotics @ git+ssh://git@github.com/ubi-coro/gymnasium-planar-robotics.git",
+    "stable-baselines3-extensions @ git+ssh://git@github.com/ubi-coro/stable-baselines3-extensions.git",
+    "hydra-zen",
+    "beartype" # type-checking
+]
+dynamic = ["version"]
