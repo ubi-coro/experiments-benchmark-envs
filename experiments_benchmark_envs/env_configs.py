@@ -39,11 +39,11 @@ def collision_params(shape: str = 'circle', size: float = 0.11, offset: float = 
 
 collision_conf = builds(collision_params)
 
-c_params_circle_small = collision_conf(shape='circle', size=0.08, offset=0.0, offset_wall=0.0)
-c_params_circle_medium = collision_conf(shape='circle', size=0.11, offset=0.0, offset_wall=0.0)
+c_params_circle_small = collision_conf(shape='circle', size=0.08, offset=0.03, offset_wall=0.0)
+c_params_circle_medium = collision_conf(shape='circle', size=0.11, offset=0.03, offset_wall=0.0)
 
-c_params_box_small = collision_conf(shape='box', size=0.06, offset=0.0, offset_wall=0.0)
-c_params_box_medium = collision_conf(shape='box', size=0.08, offset=0.0, offset_wall=0.0)
+c_params_box_small = collision_conf(shape='box', size=0.06, offset=0.03, offset_wall=0.0)
+c_params_box_medium = collision_conf(shape='box', size=0.08, offset=0.03, offset_wall=0.0)
 
 c_store = store(group='collision')
 c_store(c_params_circle_small, name='circle_small')
