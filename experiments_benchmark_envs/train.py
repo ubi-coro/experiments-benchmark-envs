@@ -38,7 +38,7 @@ learning_rate_conf = builds(learning_rate)
 def replay_buffer_kwargs(
     n_sampled_goal: int = 4, 
     goal_selection_strategy: Union[GoalSelectionStrategy, str] = 'future', 
-    copy_info_dict: bool = False
+    copy_info_dict: bool = True
 ):
     return {'n_sampled_goal': n_sampled_goal, 
             'goal_selection_strategy': goal_selection_strategy, 
@@ -61,7 +61,7 @@ sac_conf = builds_sac(
     policy='MultiInputPolicy',
     learning_rate=learning_rate_conf(),
     buffer_size=int(1e6),
-    learning_starts=1e5, # how many env steps to collect transitions for before learning starts
+    learning_starts=int(1e4), # how many env steps to collect transitions for before learning starts
     batch_size=256, # minibatch size for each gradient update
     tau=0.05, # soft update coefficient
     gamma=0.95, # discount factor
