@@ -63,7 +63,7 @@ def env(
     a_max: float = 10.0,
     j_max: float = 100.0,
     learn_jerk: bool = False,
-    threshold_pos: float = 0.01,
+    threshold_pos: float = 0.05,
     num_train: int = 50
 ):
     env_kwargs = {'mover_params': mover_params, 
