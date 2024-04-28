@@ -39,11 +39,11 @@ def collision_params(shape: str = 'circle', size: float = 0.11, offset: float = 
 
 collision_conf = builds(collision_params)
 
-c_params_circle_small = collision_conf(shape='circle', size=0.08, offset=0.03, offset_wall=0.0)
-c_params_circle_medium = collision_conf(shape='circle', size=0.11, offset=0.03, offset_wall=0.0)
+c_params_circle_small = collision_conf(shape='circle', size=0.11, offset=0.0, offset_wall=0.0)
+c_params_circle_medium = collision_conf(shape='circle', size=0.14, offset=0.0, offset_wall=0.0)
 
-c_params_box_small = collision_conf(shape='box', size=0.06, offset=0.03, offset_wall=0.0)
-c_params_box_medium = collision_conf(shape='box', size=0.08, offset=0.03, offset_wall=0.0)
+c_params_box_small = collision_conf(shape='box', size=0.09, offset=0.0, offset_wall=0.0)
+c_params_box_medium = collision_conf(shape='box', size=0.11, offset=0.0, offset_wall=0.0)
 
 c_store = store(group='collision')
 c_store(c_params_circle_small, name='circle_small')
@@ -57,7 +57,8 @@ def env(
     env_id: str,
     mover_params: dict, 
     collision_params: Callable[[str,float,float,float], dict], 
-    num_movers: int | None = None, 
+    render_mode: str | None = None,
+    num_movers: int = 1, 
     num_cycles: int = 40,
     v_max: float = 2.0,
     a_max: float = 10.0,
@@ -68,7 +69,7 @@ def env(
 ):
     env_kwargs = {'mover_params': mover_params, 
                   'collision_params': collision_params, 
-                  'render_mode': None,
+                  'render_mode': render_mode,
                   'num_cycles': num_cycles,
                   'v_max': v_max,
                   'a_max': a_max,
@@ -90,27 +91,39 @@ pushing_bs_conf = env_conf(env_id='BenchmarkPushingEnv', mover_params=mover_para
 pushing_bm_conf = env_conf(env_id='BenchmarkPushingEnv', mover_params=mover_params_medium, collision_params=c_params_box_medium)
 
 # planning
-planning_cs_conf = env_conf(
+planning_cs_conf_4 = env_conf(
     env_id='BenchmarkPlanningEnv',
     num_movers=4,
     mover_params=mover_params_small, 
     collision_params=c_params_circle_small
 )
-planning_cm_conf = env_conf(
+planning_cm_conf_3 = env_conf(
     env_id='BenchmarkPlanningEnv',
     num_movers=3,
     mover_params=mover_params_medium, 
     collision_params=c_params_circle_medium
 )
 
-planning_bs_conf = env_conf(
+planning_bs_conf_4 = env_conf(
     env_id='BenchmarkPlanningEnv',
     num_movers=4,
     mover_params=mover_params_small, 
     collision_params=c_params_box_small
 )
+planning_bs_conf_3 = env_conf(
+    env_id='BenchmarkPlanningEnv',
+    num_movers=3,
+    mover_params=mover_params_small, 
+    collision_params=c_params_box_small
+)
+planning_bs_conf_2 = env_conf(
+    env_id='BenchmarkPlanningEnv',
+    num_movers=2,
+    mover_params=mover_params_small, 
+    collision_params=c_params_box_small
+)
 
-planning_bm_conf = env_conf(
+planning_bm_conf_3 = env_conf(
     env_id='BenchmarkPlanningEnv',
     num_movers=3,
     mover_params=mover_params_medium, 
@@ -124,7 +137,9 @@ env_store(pushing_cm_conf, name='pushing_cm')
 env_store(pushing_bs_conf, name='pushing_bs')
 env_store(pushing_bm_conf, name='pushing_bm')
  
-env_store(planning_cs_conf, name='planning_cs')
-env_store(planning_cm_conf, name='planning_cm')
-env_store(planning_bs_conf, name='planning_bs')
-env_store(planning_bm_conf, name='planning_bm')
+env_store(planning_cs_conf_4, name='planning_cs_4')
+env_store(planning_cm_conf_3, name='planning_cm_3')
+env_store(planning_bs_conf_4, name='planning_bs_4')
+env_store(planning_bs_conf_3, name='planning_bs_3')
+env_store(planning_bs_conf_2, name='planning_bs_2')
+env_store(planning_bm_conf_3, name='planning_bm_3')

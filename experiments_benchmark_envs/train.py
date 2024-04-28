@@ -28,7 +28,7 @@ builds_sac = make_custom_builds_fn(zen_partial=True, populate_full_signature=Tru
 
 # learning rate config
 def learning_rate(initial_value: float = 1e-3, use_linear_lr_schedule: bool = True):
-    if use_linear_lr_schedule:
+    if not use_linear_lr_schedule:
         return initial_value
     else:
         return linear_schedule(initial_value=initial_value)
@@ -70,7 +70,7 @@ sac_conf = builds_sac(
                        # -> Set to -1 means to do as many gradient steps as steps done in the environment during the rollout 
                        # (in case of -1: depends on number of training envs!)
     ent_coef='auto', # entropy regularization coefficient ('auto': learn it automatically)
-    policy_kwargs=policy_conf(net_arch=[128,64]),
+    policy_kwargs=policy_conf(net_arch=[128,256,64]),
     replay_buffer_class=HerReplayBufferExt,
     replay_buffer_kwargs=replay_buffer_conf(),
     verbose=1,
@@ -84,7 +84,7 @@ def learning_cb(total_timesteps: int = int(3e6), max_train_episodes: int = 10000
 
 learning_cb_conf = builds(learning_cb)
 
-@store(name='train', sac=sac_conf, env_conf=env_configs.planning_bs_conf, learning_cb_conf=learning_cb_conf)
+@store(name='train', sac=sac_conf, env_conf=env_configs.planning_bs_conf_3, learning_cb_conf=learning_cb_conf)
 def train_func(sac: SAC, env_conf: dict, learning_cb_conf: dict):
     # paths
     save_path = os.getcwd()
@@ -156,7 +156,7 @@ def train_func(sac: SAC, env_conf: dict, learning_cb_conf: dict):
         
 if __name__ == "__main__":
     save_path = os.path.join(os.getcwd(), 'data')
-    save_dir_name = ('${env_conf.env_id}_MoverSize_${env_conf.mover_params.size.size}_' +
+    save_dir_name = ('${env_conf.env_id}_NumMovers_${env_conf.num_movers}_MoverSize_${env_conf.mover_params.size.size}_' +
                      'LearnJerk_${env_conf.learn_jerk}_NumCycles_${env_conf.num_cycles}_Vmax_${env_conf.v_max}_' + 
                      'Amax_${env_conf.a_max}_Jmax_${env_conf.j_max}_CollisionShape_${env_conf.collision_params.shape}_' +
                      'CollisionSize_${env_conf.collision_params.size}_CollisionOffset_${env_conf.collision_params.offset}_' +
