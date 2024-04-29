@@ -91,19 +91,33 @@ pushing_bs_conf = env_conf(env_id='BenchmarkPushingEnv', mover_params=mover_para
 pushing_bm_conf = env_conf(env_id='BenchmarkPushingEnv', mover_params=mover_params_medium, collision_params=c_params_box_medium)
 
 # planning
+# circle, small
 planning_cs_conf_4 = env_conf(
     env_id='BenchmarkPlanningEnv',
     num_movers=4,
     mover_params=mover_params_small, 
     collision_params=c_params_circle_small
 )
+planning_cs_conf_3 = env_conf(
+    env_id='BenchmarkPlanningEnv',
+    num_movers=3,
+    mover_params=mover_params_small, 
+    collision_params=c_params_circle_small
+)
+planning_cs_conf_2 = env_conf(
+    env_id='BenchmarkPlanningEnv',
+    num_movers=2,
+    mover_params=mover_params_small, 
+    collision_params=c_params_circle_small
+)
+# circle, medium
 planning_cm_conf_3 = env_conf(
     env_id='BenchmarkPlanningEnv',
     num_movers=3,
     mover_params=mover_params_medium, 
     collision_params=c_params_circle_medium
 )
-
+# box, small
 planning_bs_conf_4 = env_conf(
     env_id='BenchmarkPlanningEnv',
     num_movers=4,
@@ -122,7 +136,7 @@ planning_bs_conf_2 = env_conf(
     mover_params=mover_params_small, 
     collision_params=c_params_box_small
 )
-
+# box, medium
 planning_bm_conf_3 = env_conf(
     env_id='BenchmarkPlanningEnv',
     num_movers=3,
@@ -138,8 +152,13 @@ env_store(pushing_bs_conf, name='pushing_bs')
 env_store(pushing_bm_conf, name='pushing_bm')
  
 env_store(planning_cs_conf_4, name='planning_cs_4')
+env_store(planning_cs_conf_3, name='planning_cs_3')
+env_store(planning_cs_conf_2, name='planning_cs_2')
+
 env_store(planning_cm_conf_3, name='planning_cm_3')
+
 env_store(planning_bs_conf_4, name='planning_bs_4')
 env_store(planning_bs_conf_3, name='planning_bs_3')
 env_store(planning_bs_conf_2, name='planning_bs_2')
+
 env_store(planning_bm_conf_3, name='planning_bm_3')
