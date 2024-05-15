@@ -1,9 +1,6 @@
 import numpy as np
 from typing import Callable
-from hydra_zen import make_custom_builds_fn, zen, store
-
-from gymnasium_planar_robotics.envs.manipulation.benchmark_pushing_env import BenchmarkPushingEnv
-from gymnasium_planar_robotics.envs.planning.benchmark_planning_env import BenchmarkPlanningEnv
+from hydra_zen import make_custom_builds_fn, store
 
 # builds: set customized default values 
 builds = make_custom_builds_fn(populate_full_signature=True)
@@ -76,7 +73,7 @@ def env(
                   'j_max': j_max,
                   'learn_jerk': learn_jerk,
                   'threshold_pos': threshold_pos}
-    if env_id == 'BenchmarkPlanningEnv':
+    if env_id == 'BenchmarkPlanningEnv-v0':
         env_kwargs.update({'layout_tiles': np.ones((4,3)), 'num_movers': num_movers, 'show_2D_plot': False})
     
     return {'env_id': env_id, 'env_kwargs': env_kwargs, 'num_train': num_train}
@@ -84,61 +81,61 @@ def env(
 env_conf = builds(env)
 
 # pushing 
-pushing_cs_conf = env_conf(env_id='BenchmarkPushingEnv', mover_params=mover_params_small, collision_params=c_params_circle_small)
-pushing_cm_conf = env_conf(env_id='BenchmarkPushingEnv', mover_params=mover_params_medium, collision_params=c_params_circle_medium)
+pushing_cs_conf = env_conf(env_id='BenchmarkPushingEnv-v0', mover_params=mover_params_small, collision_params=c_params_circle_small)
+pushing_cm_conf = env_conf(env_id='BenchmarkPushingEnv-v0', mover_params=mover_params_medium, collision_params=c_params_circle_medium)
 
-pushing_bs_conf = env_conf(env_id='BenchmarkPushingEnv', mover_params=mover_params_small, collision_params=c_params_box_small)
-pushing_bm_conf = env_conf(env_id='BenchmarkPushingEnv', mover_params=mover_params_medium, collision_params=c_params_box_medium)
+pushing_bs_conf = env_conf(env_id='BenchmarkPushingEnv-v0', mover_params=mover_params_small, collision_params=c_params_box_small)
+pushing_bm_conf = env_conf(env_id='BenchmarkPushingEnv-v0', mover_params=mover_params_medium, collision_params=c_params_box_medium)
 
 # planning
 # circle, small
 planning_cs_conf_4 = env_conf(
-    env_id='BenchmarkPlanningEnv',
+    env_id='BenchmarkPlanningEnv-v0',
     num_movers=4,
     mover_params=mover_params_small, 
     collision_params=c_params_circle_small
 )
 planning_cs_conf_3 = env_conf(
-    env_id='BenchmarkPlanningEnv',
+    env_id='BenchmarkPlanningEnv-v0',
     num_movers=3,
     mover_params=mover_params_small, 
     collision_params=c_params_circle_small
 )
 planning_cs_conf_2 = env_conf(
-    env_id='BenchmarkPlanningEnv',
+    env_id='BenchmarkPlanningEnv-v0',
     num_movers=2,
     mover_params=mover_params_small, 
     collision_params=c_params_circle_small
 )
 # circle, medium
 planning_cm_conf_3 = env_conf(
-    env_id='BenchmarkPlanningEnv',
+    env_id='BenchmarkPlanningEnv-v0',
     num_movers=3,
     mover_params=mover_params_medium, 
     collision_params=c_params_circle_medium
 )
 # box, small
 planning_bs_conf_4 = env_conf(
-    env_id='BenchmarkPlanningEnv',
+    env_id='BenchmarkPlanningEnv-v0',
     num_movers=4,
     mover_params=mover_params_small, 
     collision_params=c_params_box_small
 )
 planning_bs_conf_3 = env_conf(
-    env_id='BenchmarkPlanningEnv',
+    env_id='BenchmarkPlanningEnv-v0',
     num_movers=3,
     mover_params=mover_params_small, 
     collision_params=c_params_box_small
 )
 planning_bs_conf_2 = env_conf(
-    env_id='BenchmarkPlanningEnv',
+    env_id='BenchmarkPlanningEnv-v0',
     num_movers=2,
     mover_params=mover_params_small, 
     collision_params=c_params_box_small
 )
 # box, medium
 planning_bm_conf_3 = env_conf(
-    env_id='BenchmarkPlanningEnv',
+    env_id='BenchmarkPlanningEnv-v0',
     num_movers=3,
     mover_params=mover_params_medium, 
     collision_params=c_params_box_medium
