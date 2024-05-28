@@ -6,12 +6,12 @@ build-backend = "setuptools.build_meta"
 name = "experiments-benchmark-envs"
 description = "Training and evaluation scripts for Gymnasium-Planar-Robotics benchmark environments"
 readme = "README.md"
-requires-python = ">= 3.10"
+requires-python = ">= 3.11"
 authors = [{ name = "Lara Bergmann", email = "lara.bergmann@uni-bielefeld.de" }]
 keywords = ["Reinforcement Learning Algorithms", "Reinforcement Learning", "Gymnasium", "Gym", "AI", "Machine Learning"]
 classifiers = [
     "Development Status :: 4 - Beta",
-    "License :: OSI Approved :: MIT License",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
